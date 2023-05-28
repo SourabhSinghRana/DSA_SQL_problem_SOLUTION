@@ -85,3 +85,66 @@ class Solution:
             if(n<=0): return True    
 
         return False
+    
+    
+    
+    
+'''
+Question 6
+Given an array of integers nums which is sorted in ascending order, and an integer target,
+write a function to search target in nums. If target exists, then return its index. Otherwise,
+return -1.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+
+Explanation: 9 exists in nums and its index is 4
+'''
+
+
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        
+        length = len(nums)
+        
+        start = 0
+        mid = int(length-1 / 2)
+        end = length-1
+        
+        while(start <= end):
+            #print(start, mid, end)
+            if(target == nums[mid]):
+                return mid
+            elif(target > nums[mid]):
+                start = mid+1
+            else:
+                end = mid-1
+            mid =  int((start+end)/2)   
+
+        return -1             
+    
+    
+'''
+Question 7
+An array is monotonic if it is either monotone increasing or monotone decreasing.
+
+An array nums is monotone increasing if for all i <= j, nums[i] <= nums[j]. An array nums is
+monotone decreasing if for all i <= j, nums[i] >= nums[j].
+
+Given an integer array nums, return true if the given array is monotonic, or false otherwise.
+
+Example 1:
+Input: nums = [1,2,2,3]
+Output: true
+'''  
+    
+class Solution:
+    def isMonotonic(self, nums: List[int]) -> bool:
+       inc = True
+       dec = True
+       for i in range(1,len(nums)):
+           inc = inc and nums[i-1] >= nums[i]
+           dec = dec and nums[i-1] <= nums[i]
+       return inc or dec
